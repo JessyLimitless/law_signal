@@ -768,6 +768,101 @@ blockquote.lesson-box {
 }
 
 /* ══════════════════════════════════════
+   COLOPHON (판권 페이지)
+   ══════════════════════════════════════ */
+.colophon {
+  max-width: 560px;
+  margin: 80px auto 0;
+  padding: 0 32px 64px;
+  text-align: center;
+}
+.colophon-title-area {
+  padding: 48px 0 32px;
+}
+.colophon-book-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: var(--fg);
+  letter-spacing: -.03em;
+  line-height: 1.3;
+}
+.colophon-book-title em {
+  font-style: normal;
+  color: var(--accent);
+}
+.colophon-book-sub {
+  font-family: 'Pretendard', sans-serif;
+  font-size: .82rem;
+  color: var(--fg-muted);
+  margin-top: 8px;
+  letter-spacing: .04em;
+}
+.colophon-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--accent);
+  margin: 0 auto 32px;
+}
+.colophon-info {
+  font-family: 'Pretendard', sans-serif;
+  font-size: .88rem;
+  color: var(--fg);
+  line-height: 2.2;
+  text-align: left;
+  display: inline-block;
+}
+.colophon-info strong {
+  display: inline-block;
+  width: 72px;
+  color: var(--fg-muted);
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.colophon-price {
+  margin: 32px auto;
+  padding: 14px 32px;
+  display: inline-block;
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .02em;
+}
+.colophon-copyright {
+  margin-top: 32px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: .75rem;
+  color: var(--fg-muted);
+  line-height: 1.8;
+}
+.colophon-copyright p { margin: 4px 0; }
+.colophon-publisher {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.colophon-publisher-name {
+  font-family: 'Pretendard', sans-serif;
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: .06em;
+}
+.colophon-publisher-info {
+  font-family: 'Pretendard', sans-serif;
+  font-size: .72rem;
+  color: var(--fg-muted);
+  margin-top: 8px;
+  line-height: 1.7;
+}
+@media print {
+  .colophon { page-break-before: always; }
+}
+
+/* ══════════════════════════════════════
    FOOTER
    ══════════════════════════════════════ */
 .site-footer {
@@ -9983,10 +10078,50 @@ Step 7. 매도 규칙: 법적 감점 -10점 초과 시 즉시 매도
 <hr>
 </div></div>
 
+  <!-- Colophon (판권) -->
+  <div class="colophon" id="colophon">
+    <div class="colophon-title-area">
+      <div class="colophon-book-title">상법 <em>Signal</em></div>
+      <div class="colophon-book-sub">기업 지배구조의 소스코드를 읽는 기술</div>
+    </div>
+
+    <div class="colophon-divider"></div>
+
+    <div class="colophon-info">
+      <div><strong>지은이</strong> DART Insight</div>
+      <div><strong>펴낸이</strong> 소셜브레인</div>
+      <div><strong>펴낸곳</strong> 소셜브레인</div>
+      <div><strong>시리즈</strong> DART Insight Series</div>
+      <div><strong>초판 1쇄</strong> 2026년 3월</div>
+      <div><strong>등록번호</strong> 251002023000251</div>
+      <div><strong>분류</strong> 경제경영 &gt; 투자 &gt; 기업분석</div>
+      <div><strong>판형</strong> 전자책 (웹 에디션)</div>
+    </div>
+
+    <div class="colophon-price">정가 25,000원</div>
+
+    <div class="colophon-copyright">
+      <p>&copy; 2026 소셜브레인. All Rights Reserved.</p>
+      <p>이 책의 저작권은 저자에게 있습니다.</p>
+      <p>저작권법에 의해 보호를 받는 저작물이므로 무단 전재와 무단 복제를 금합니다.</p>
+      <p>이 책 내용의 전부 또는 일부를 이용하려면 반드시 저작권자의 서면 동의를 받아야 합니다.</p>
+    </div>
+
+    <div class="colophon-publisher">
+      <div class="colophon-publisher-name">소셜브레인</div>
+      <div class="colophon-publisher-info">
+        본 자료는 법률 교육 및 투자 연구 목적으로 제작되었으며,<br/>
+        특정 법률 사안에 대한 법률적 조언이 아닙니다.<br/>
+        투자 판단은 독자 본인의 책임하에 이루어져야 합니다.<br/><br/>
+        소셜브레인 &middot; 서울특별시 마포구<br/>
+        출판사 등록번호 251002023000251 &middot; 등록일자 2023.10.13
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="site-footer">
     <p>상법 Signal &mdash; 기업 지배구조의 소스코드를 읽는 기술</p>
-    <p style="margin-top:6px;">본 자료는 법률 교육 목적이며, 특정 법률 사안에 대한 법률적 조언이 아닙니다.</p>
     <p style="margin-top:6px;">&copy; 2026 DART Insight</p>
   </footer>
 </main>
