@@ -1585,7 +1585,7 @@ blockquote.lesson-box {
   <!-- 저작권 -->
   <div class="colophon" id="colophon">
     <div class="colophon-copyright">
-      <p>&copy; 2026 주식회사 뮤즈에아이이. All Rights Reserved.</p>
+      <p>&copy; 2025 주식회사 뮤즈에이아이. All rights reserved.</p>
       <p>출판사 등록번호 251002023000251</p>
     </div>
   </div>
@@ -1593,7 +1593,7 @@ blockquote.lesson-box {
   <!-- Footer -->
   <footer class="site-footer">
     <p>상법 Signal &mdash; 기업 지배구조의 소스코드를 읽는 기술</p>
-    <p style="margin-top:6px;">&copy; 2026 주식회사 뮤즈에아이이</p>
+    <p style="margin-top:6px;">&copy; 2025 주식회사 뮤즈에이아이</p>
   </footer>
 </main>
 
