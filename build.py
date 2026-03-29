@@ -1115,6 +1115,51 @@ blockquote.lesson-box {
 /* ══════════════════════════════════════
    FLOATING BUTTONS
    ══════════════════════════════════════ */
+/* ══════════════════════════════════════
+   PAGE INDICATOR
+   ══════════════════════════════════════ */
+.page-indicator {
+  position: fixed;
+  bottom: 28px; left: 28px;
+  z-index: 999;
+  font-family: 'Pretendard', sans-serif;
+  font-size: .72rem;
+  color: var(--fg-muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+  transition: opacity .3s;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.page-indicator .pi-section {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 6px;
+}
+.page-indicator .pi-page {
+  color: var(--fg-muted);
+  font-size: .65rem;
+  margin-left: 8px;
+  opacity: .6;
+}
+@media (max-width: 900px) {
+  .page-indicator {
+    bottom: 16px; left: 16px;
+    font-size: .65rem;
+    padding: 6px 10px;
+    max-width: 160px;
+  }
+}
+@media print {
+  .page-indicator { display: none !important; }
+}
+
 .fab-group {
   position: fixed; bottom: 28px; right: 28px;
   display: flex; flex-direction: column; gap: 10px;
@@ -1527,7 +1572,7 @@ blockquote.lesson-box {
     </ul>
   </div>
   <div class="sidebar-footer">
-    &copy; 2026 상법 Signal &middot; DART Insight
+    &copy; 2025 주식회사 뮤즈에이아이
   </div>
 </nav>
 
@@ -1557,7 +1602,7 @@ blockquote.lesson-box {
     </svg>
     <!-- 콘텐츠 -->
     <div class="cover-inner">
-      <span class="cover-badge">DART Insight Series</span>
+      <span class="cover-badge">상법 Signal Series</span>
       <h1>상법 <em>Signal</em></h1>
       <p class="cover-hangul-sub">기업 지배구조의 소스코드를 읽는 기술</p>
       <div class="cover-divider"></div>
@@ -1570,7 +1615,7 @@ blockquote.lesson-box {
         <div class="cover-stat"><span class="cover-stat-num">25</span><span class="cover-stat-label">Sections</span></div>
         <div class="cover-stat"><span class="cover-stat-num">42+</span><span class="cover-stat-label">Cases</span></div>
       </div>
-      <p class="cover-meta">DART Insight &middot; 소셜브레인</p>
+      <p class="cover-meta">주식회사 뮤즈에이아이</p>
     </div>
     <!-- 스크롤 힌트 -->
     <div class="cover-scroll-hint">
@@ -1596,6 +1641,13 @@ blockquote.lesson-box {
     <p style="margin-top:6px;">&copy; 2025 주식회사 뮤즈에이아이</p>
   </footer>
 </main>
+
+<!-- Page Indicator -->
+<div class="page-indicator" id="page-indicator">
+  <span class="pi-section" id="pi-section"></span>
+  <span class="pi-title" id="pi-title"></span>
+  <span class="pi-page" id="pi-page"></span>
+</div>
 
 <!-- FABs -->
 <div class="fab-group">
@@ -1659,6 +1711,14 @@ blockquote.lesson-box {
     const el = id && document.getElementById(id);
     if(el) sections.push({el, a});
   });
+  /* ── Page indicator ── */
+  const piSection = document.getElementById('pi-section');
+  const piTitle = document.getElementById('pi-title');
+  const piPage = document.getElementById('pi-page');
+  const pageIndicator = document.getElementById('page-indicator');
+  const allSections = document.querySelectorAll('.chapter-section, .prologue-section, .epilogue-section, .appendix-section');
+  const totalSections = allSections.length;
+
   function updateActive(){
     let current = null;
     for(const s of sections){
@@ -1666,6 +1726,35 @@ blockquote.lesson-box {
     }
     tocLinks.forEach(a => a.classList.remove('active'));
     if(current) current.a.classList.add('active');
+
+    /* Update page indicator */
+    if(current && current.a){
+      const numEl = current.a.querySelector('.toc-sec-num');
+      const titleEl = current.a.querySelector('.toc-sec-title');
+      const specialText = current.a.textContent.trim();
+      if(numEl){
+        piSection.textContent = numEl.textContent;
+        piTitle.textContent = titleEl ? titleEl.textContent : '';
+      } else {
+        piSection.textContent = '';
+        piTitle.textContent = specialText;
+      }
+      /* Calculate page number */
+      let idx = 0;
+      allSections.forEach((el, i) => { if(el === current.el || el.contains(current.el) || current.el.contains(el)) idx = i+1; });
+      if(idx === 0){
+        for(let i=0; i<allSections.length; i++){
+          if(allSections[i].getBoundingClientRect().top <= 120) idx = i+1;
+        }
+      }
+      piPage.textContent = idx > 0 ? idx + ' / ' + totalSections : '';
+      pageIndicator.style.opacity = '1';
+    } else {
+      pageIndicator.style.opacity = window.scrollY > 300 ? '1' : '0';
+      piSection.textContent = '';
+      piTitle.textContent = 'COVER';
+      piPage.textContent = '';
+    }
   }
   window.addEventListener('scroll', updateActive, {passive:true});
 
